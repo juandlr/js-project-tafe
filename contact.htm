@@ -1,0 +1,204 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Beatmap Product Enquiry Form</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<link href="styles/style.css" rel="stylesheet" type="text/css" />
+<style type="text/css">
+	.title {
+		margin-bottom:10px;
+	}
+
+</style>
+<script type="text/javascript">
+
+// attach event handler to submit event of form
+    window.onload = init;
+    function init() {
+        document.forms[1].onsubmit = validateForm;  
+        document.getElementById('login').onsubmit = validateLogin;
+        checkStatus();
+    }
+	
+// validation script #1 #2	
+// declare validation form
+    function validateForm() {
+// validation regular expressions
+           var regEmpty = /^\s$/;
+		   var regEmail = /[\w_\.\-]+@([\w\-]+\.)+[a-zA-Z]+$/;
+
+// get elements to be validated and initieate error and confirmation details	
+           var name = document.getElementById('name');
+		   var email = document.getElementById('email');
+           var artist = document.getElementById('artist');
+           var album =  document.getElementById('album');
+           var comments = document.getElementById('comments');
+		   var details = "";
+           var errors = "";
+           
+           if (regEmpty.test(name.value) || name.value == "") {
+            name.style.border = "1px solid red";
+            errors += "Please enter a valid name \n"; 
+           } else {
+		   name.style.border = "2px black inset";
+		   details += "Name: " + name.value + "\n";
+		   
+		   }
+		   
+		   if (!regEmail.test(email.value) || email.value  == "" || regEmpty.test(email.value)) {
+            email.style.border = "1px solid red";
+            errors += "Please enter a valid email \n"; 
+           } else {
+		   email.style.border = "2px black inset";
+		   details += "Email: " + email.value + "\n"	   
+		   }
+		   
+		    if (artist.value  == "" || regEmpty.test(artist.value)) {
+            artist.style.border = "1px solid red";
+            errors += "Please enter a valid Artist \n"; 
+           } else {
+		   artist.style.border = "2px black inset";
+		   details += "Artist: " + artist.value + "\n";	   
+		   }
+		   
+		     if (album.value  == "" || regEmpty.test(album.value)) {
+            album.style.border = "1px solid red";
+            errors += "Please enter a valid Album \n"; 
+           } else {
+		   album.style.border = "2px black inset";
+		   details += "Album: " + album.value + "\n";	   
+		   }
+		   
+		   
+		    if (comments.value  == "" || regEmpty.test(comments.value)) {
+            comments.style.border = "1px solid red";
+            errors += "Please enter your comments \n"; 
+           } else {
+		   comments.style.border = "2px black inset";
+		   details += "Comments: " + comments.value + "\n";	   
+		   }
+		   
+		   if (errors != "") {
+		   alert(errors);
+		   return false;
+		   } else { submit = confirm("Are these details correct \n" + details);
+					if (submit == true) {
+					alert("Thank You");
+					return true;
+					}
+					else return false;
+					}
+		              
+    }
+    
+    
+// start login script #3 #4
+    function validateLogin() {
+    // get values from form fields
+ 	  var user = document.getElementById("txtuser").value;
+      var pass = document.getElementById("txtpass").value; 
+      // if user is juan and password is abc a cookie is set, function loggedIn is called and the user is alerted that he is logged in with his name
+ 		if (user == "juan" && pass == "abc") {
+			 document.cookie = "user="+user;
+             document.cookie = "pass="+pass;
+             loggedIn(user);                                      
+             alert("You are now logged in " + user);
+			}
+   // else alert the user that the user and password is not correct  
+			else  alert('The user name and password provided do not match');
+            return false;		
+	   }
+       
+  // function logged in changes the login form for a logout link, if user is loggein it fills name and email fields of contact form             
+       function loggedIn(user) {
+             var header = document.getElementById("header");    
+             var logout = document.createElement("a");
+             var strLogout = document.createTextNode("Logout " + user);
+             logout.appendChild(strLogout);              
+             logout.href = "#";
+             logout.id = "logout";
+             logout.onclick = loggedOut;
+             logout.style.marginLeft = "600px";
+             back = header.replaceChild(logout, document.getElementById('login')); 
+              document.getElementById("name").value = "juan";
+            document.getElementById("email").value = "juan@tafe.com"; 
+       }
+      /* 
+       everytime the page loads checkstatus is executed, it checks for a cookie, 
+       if the cookie is set it calls the loggeIn function to display a logout link otherwise 
+       the login form is displayed
+       */
+    function checkStatus() {
+        var strCookie = document.cookie;
+        var index1 = strCookie.indexOf("juan");
+        var index1a = strCookie.indexOf(";", index1)
+        var index2 = strCookie.indexOf("abc");
+        if (index1 != -1 && index2 != -1) {
+            var user = strCookie.substring(index1, index1a);
+            loggedIn(user);
+        }
+    }
+    
+    /*
+    loggedOut function destroys the cookie that is set and replaces the logout link
+    for the login form
+    */
+    function loggedOut() {
+        document.cookie = "user=;max-age=0";
+        document.cookie = "pass=;max-age=0";
+        var header = document.getElementById("header");
+        var logout = document.getElementById("logout");                 
+        header.replaceChild(back, document.getElementById('logout')); 
+        document.getElementById("name").value = "";
+        document.getElementById("email").value = "";           
+    }	
+
+// End Login Functions
+
+
+</script>
+
+</head>
+<body>
+<div id="central">
+	<div id="header">
+		
+        <form id="login" action="" method="get" >
+       <p><label for="txtuser">User:</label> <input type="text" class="text" name="txtuser" id="txtuser"/><br/>
+       <label for="txtpass">Password:</label> <input type="text" class="text" name="txtpass" id="txtpass"/><br/>
+       <input type="submit" class="buttons" id="btnlogin" name="btnlogin" value="Login"/></p>
+        </form>
+        
+	</div>
+    <ul id="navlist">
+      <li><a id="n1" href="index.htm">Home</a></li>
+      <li><a id="n2" href="products.htm">Products</a></li>
+      <li><a id="n3" href="reviews.htm">Reviews</a></li>
+      <li><span id="current"><a id="n4" href="#">Enquiries</a></span></li>
+  </ul>
+<div id="content" style="background-image:none;">
+<div id="leftside">
+			<h3>Featured Artist</h3>
+			<div id="picture1" style="background-image:url(images/product/rihanna.jpg);"></div>
+			<h3>Featured Artist</h3>
+			<div id="picture2" style="background-image:url(images/product/staticx.jpg);"></div>
+		</div>
+		<div id="rightside" style="font-size:10px;">
+		
+        <form id="project" action="" method="">
+       Your Name: <input type="text" class="text" name="txtname" id="name"/><br/>&nbsp;<br/>
+       Email: <input type="text" class="text" name="txtemail" id="email"/><br/>&nbsp;<br/>
+       Artist: <input type="text" class="text" name="txtartist" id="artist"/><br/>&nbsp;<br/>
+       Song / Album: <input type="text" class="text" name="txtalbum" id="album"/><br/>&nbsp;<br/>
+       Comments: <textarea class="ta" name="txtcomments" id="comments" cols="30" rows="20"></textarea><br/>&nbsp;<br/>
+       <input type="submit" class="buttons" id="btnSubmit" name="btnsubmit" value="Send Enquiry"/>
+        </form>
+
+	
+    	</div>
+		<div id="footer"><p>Powered by <a href="http://www.freewebsitetemplates.com">Free Website Templates</a></p></div>
+	</div>
+  <div id="imagepreloader"></div>
+</div>
+</body>
+</html>

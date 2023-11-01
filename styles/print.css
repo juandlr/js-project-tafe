@@ -1,0 +1,11 @@
+p, li{font-size:12pt;
+font-family:Times New Roman, sans-serif;
+}
+#one,  h1{border:none;}
+ol li{padding-top:10px;
+}
+#mark{border:5px solid #ccc;
+padding:5px 20px 5px 10px;
+margin:10px;
+background:#ffffe0;
+}

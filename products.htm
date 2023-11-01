@@ -1,0 +1,193 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Beatmap Products</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<link href="styles/style.css" rel="stylesheet" type="text/css" />
+<style type="text/css">
+	#searchdiv {
+		position:absolute;
+		margin-top:190px;
+		margin-left:565px;
+	}
+	#login{float:right;
+		width:220px;
+		height:80px;
+		margin:0;
+		padding:5px;
+	}
+	
+	#txtsearch{line-height:20px;
+		vertical-align:bottom;
+	}
+	#btnsearch{line-height:20px;
+		margin:0.5em 0.3em 0.4em 0;
+		vertical-align:bottom; 
+	}
+</style>
+<script>
+
+// declares artist array, this array will contain the possible values of the search feature, suggestions will be based on this list.
+    artists = ["abba", "addiction", "amy", "aphex", "backstreet", "bjork", "bowie", "donna", "elliott", "fergie", "groove", "him", "jeff", "kanye", "linkin", "mariah", "rob"];
+    window.onload = init;  
+  
+  function init() {
+            document.getElementById('search').onkeyup = suggestions;
+            inputType = document.getElementById("txtsearch"); 
+              // attaches event handler to onsubmit event of login form
+   	        document.getElementById('login').onsubmit = validateLogin;
+            // every time the page loads check status function executes
+            checkStatus();
+  }
+        
+        /*
+         everytime the user types something in the searchbox the keyup event is fired
+         and calls the suggestion function, the suggestion function take the value that the user
+         just typed and creates a regular expression based on that value to search for in the artists array
+         if it finds a match is adds the match to the arrSugg array and displays a box with the values of this new array
+         every value that is appended to this array is wrapped in a span which has an onclick event attached that changes the
+         value of the search box to the selection and displays a picture of that product.
+         */
+        function suggestions() {
+            var arrSugg = new Array();
+            regText = inputType.value;
+            if (regText == "") {
+                document.getElementById("suggestions").style.display = "none";
+                return;
+            } 
+            regExpre = new RegExp("^" + regText + "\w*", "i");
+            for (var i=0; i<artists.length; i++) {
+                if (regExpre.test(artists[i])) {
+                    arrSugg.push(artists[i]);
+                }                
+            }
+            if (arrSugg.length != 0) {
+                var strAppend = "";
+                for (var j = 0; j<arrSugg.length; j++) {
+                strAppend += "<span style='cursor: default'>" + arrSugg[j] + "</span><br />";
+                }
+                var suggestions = document.getElementById("suggestions");
+                suggestions.style.display = "block";
+                suggestions.innerHTML = strAppend;
+                var suggChilds = suggestions.childNodes;
+                for (var i = 0; suggChilds.length; i++) {
+                    suggChilds[i].onclick = seleccion;
+                }
+            } else document.getElementById("suggestions").style.display = "none";
+        }
+        
+        function seleccion() {
+            strSeleccion = this.innerHTML;
+            document.getElementById("suggestions").style.display = 'none';
+            inputType.value = strSeleccion;
+            document.getElementById("product1").innerHTML = "<h1>" + strSeleccion + "</h1>" + "<img src=images/product/" + strSeleccion + ".jpg />";
+        }     
+
+// Login script by Juan David Lopez #3
+ 
+// function login sets a cookie when a user submits the right user and password combination whick is juan and abc
+function validateLogin() {
+    // get values from form fields
+      var user = document.getElementById("txtuser").value;
+      var pass = document.getElementById("txtpass").value; 
+      // if user is juan and password is abc a cookie is set, function loggedIn is called and the user is alerted that he is logged in with his name
+ 		if (user == "juan" && pass == "abc") {
+			 document.cookie = "user="+user;
+             document.cookie = "pass="+pass;
+             loggedIn(user);                                      
+             alert("You are now logged in " + user);
+			}
+   // else alert the user that the user and password is not correct  
+			else  alert('The user name and password provided do not match');
+            return false;		
+	   }
+       
+  // function logged in changes the login form for a logout link             
+       function loggedIn(user) {
+             var header = document.getElementById("header");    
+             var logout = document.createElement("a");
+             var strLogout = document.createTextNode("Logout " + user);
+             logout.appendChild(strLogout);              
+             logout.href = "#";
+             logout.id = "logout";
+             logout.onclick = loggedOut;
+             logout.style.marginLeft = "600px";
+             back = header.replaceChild(logout, document.getElementById('login'));  
+       }
+      /* 
+       everytime the page loads checkstatus is executed, it checks for a cookie, 
+       if the cookie is set it calls the loggeIn function to display a logout link otherwise 
+       the login form is displayed
+       */
+    function checkStatus() {
+        var strCookie = document.cookie;
+        var index1 = strCookie.indexOf("juan");
+        var index1a = strCookie.indexOf(";", index1)
+        var index2 = strCookie.indexOf("abc");
+        if (index1 != -1 && index2 != -1) {
+            var user = strCookie.substring(index1, index1a);
+            loggedIn(user);
+        }
+    }
+    
+    /*
+    loggedOut function destroys the cookie that is set and replaces the logout link
+    for the login form
+    */
+    function loggedOut() {
+        document.cookie = "user=;max-age=0";
+        document.cookie = "pass=;max-age=0";
+        var header = document.getElementById("header");
+        var logout = document.getElementById("logout");                 
+        header.replaceChild(back, document.getElementById('logout'));             
+    }	
+
+// End Login Functions
+  
+</script>
+</head>
+<body>
+<div id="central">
+	<div id="header">
+	
+       <form id="login" action="" method="get">
+      <p><label for="txtuser">User:</label> <input type="text" class="text" name="txtuser" id="txtuser"/><br/>
+       <label for="txtpass">Password:</label><input type="text" class="text" name="txtpass" id="txtpass"/><br/>
+       <input type="submit" class="buttons" id="btnlogin" name="btnlogin" value="Login"/></p>
+        </form>
+
+        <div id="searchdiv">
+        <form id="search" action="" method="get">
+        <p><input type="text" class="text" name="txtsearch" id="txtsearch"/>
+       <input type="submit" class="buttons" id="btnsearch" name="btnsearch" value="Search"/></p>
+        </form><div style="position: absolute; top: 30px; left: 65px; width: 105px; border: 1px solid #969696; background-color: white;  display: none" id="suggestions"></div>
+        </div>
+	</div>
+    <ul id="navlist">
+      <li><a id="n1" href="index.htm">Home</a></li>
+      <li><span id="current"><a id="n2" href="#">Products</a></span></li>
+      <li><a id="n3" href="reviews.htm">Reviews</a></li>
+      <li><a id="n4" href="contact.htm">Enquiries</a></li>
+  </ul>
+<div id="content" style="background-image:none;">
+<div id="leftside">
+			<h3>Featured Artist</h3>
+			<div id="picture1" style="background-image:url(images/product/jeff.jpg);"></div>
+			<h3>Featured Artist</h3>
+			<div id="picture2" style="background-image:url(images/product/stereophonics.jpg);"></div>
+		</div>
+        <div id="prodsearch">
+
+        </div>
+		<div id="rightside">
+
+           <div id="product1">
+
+           </div>
+		</div>
+		<div id="footer"><p>Powered by <!-- Do not remove this see terms of use on http://www.freewebsitetemplates.com/termsofuse.htm --><a href="http://www.freewebsitetemplates.com">Free Website Templates</a></p></div>
+	</div>
+  <div id="imagepreloader"></div>
+</div>
+</body>
+</html>

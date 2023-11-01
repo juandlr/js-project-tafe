@@ -1,0 +1,6 @@
+ <div id="review"><p><b><i>Volta</i></b>
+If you wanted to find the last time Björk really let her hair down on a record, you'd have to look all the way back to 1995's Post. From "Army of Me" (its video found her driving a tank and wearing gold teeth) to "It's Oh So Quiet" to "I Miss You", that record sired some of the most vibrant songs of her career. It's a side of her we've only caught in brief glimpses ever since.  In the course of moving back to Iceland after a letter bomb scare in 1997, engaging in psychological warfare with Lars Von Trier on the set of 2000's oppressively bleak Dancer in the Dark, falling in love with Matthew Barney in 2001, giving birth to her second child in 2002, and of course, just getting older, Björk's output has become increasingly austere and inward-looking. The unhinged, mischievous screamers that were once her calling card are now mostly a thing of the past, replaced by songs that more closely resemble holy moments than sing-alongs.
+</p>
+			</div>
+				<h3 id="artistname">Bjork</h3>
+					<div id="picture1" style="background-image:url(images/product/bjork.jpg);"></div>

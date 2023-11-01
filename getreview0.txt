@@ -1,0 +1,6 @@
+<div id="review"><p><span style="font-style:italic;">Venus Doom</span> sees the band's trademark gloom as evident as ever. Darkness abounds within the lyrics offered here.</p>
+				<p>As always, you can expect to hear the words "suffering," "blood," "misery," and "death" peppered liberally throughout the songs. </p>
+				<p>Of course with lines like, "my heart's a graveyard, baby, and to evil we make love," H.I.M. isn't a band known for profound lyrics, but, at the same time, most fans of the band don't want to philosophize, they want to hear the group rock out, and this release shows them doing precisely that, harder than ever before.</p></div>
+				<h3 id="artistname">His Infernal Majesty</h3>
+					<div id="picture1" style="background-image:url(images/product/him.jpg);"></div>
+			</div>

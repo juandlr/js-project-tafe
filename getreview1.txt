@@ -1,0 +1,4 @@
+ <div id="review"><p><b><i>Richard D. James Album</i></b>For anyone raised on rock & roll, the new world of electronic music can seem like a strange and forbidding place. From trip-hop to techno, acid house to drum and bass, the myriad styles and subgenres bear names far more exotic than "punk" and "grunge," and the music doesn't play by rock's rules. Songs rarely follow verse-chorus-verse formulas, they don't often have singers, and even when you get a guitar riff, chances are, it's been sampled off an old record and distorted until it doesn't sound like a guitar anymore.</p>
+			</div>
+				<h3 id="artistname">Aphex Twin</h3>
+					<div id="picture1" style="background-image:url(images/product/aphex.jpg);"></div>

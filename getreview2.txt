@@ -1,0 +1,6 @@
+ <div id="review"><p><b><i>Back to Black</i></b>
+ Why, if you were of a cynical bent, you'd swear it was a publicity stunt. Almost exactly three years after her well received debut Frank, Amy Winehouse suddenly reappears (with a certain other mouthy, press-friendly female singer from London getting the kind of publicity that she could only have dreamed of). 
+</p>
+			</div>
+				<h3 id="artistname">Amy Winehouse</h3>
+					<div id="picture1" style="background-image:url(images/product/amy.jpg);"></div>
